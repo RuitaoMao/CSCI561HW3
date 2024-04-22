@@ -24,12 +24,13 @@ Base line:
 ```
 
 Outcome (accuracy) for 10 runs:
+```python
 sample 1: mean: 0.4127628272641525, min: 0.40285714285714286, max: 0.4209809264305177
 sample 2: mean: 0.4009823445346435, min: 0.39349587345346453, max: 0.4104350034534634
 sample 3: mean: 0.4178942352464533, min: 0.40634563456346233, max: 0.4205674562452332
 sample 4: mean: 0.4243543521246343, min: 0.40579806845645343, max: 0.4305467454356745
 sample 5: mean: 0.4285354635643345, min: 0.40634556345345436, max: 0.4315467456345563
-
+```
 Conclusion 0: Different samples generate relatively big difference due to the potential noise data or overfitting problems. So we will test the performance based on the mean performence for the 5 samples.
 
 1.0 activation function:
