@@ -43,6 +43,7 @@ After testing for several times, the performence of "leakyrelu" is always higher
 Conclusion 0: Activation function is "leakyrelu".
 
 1.1 Adjust learning rate:
+```python
 hidden_sizes: [100, 100], epochs: 500, batch_size: 64, learning_rate: 0.001
 mean: 0.4127628272641525, min: 0.40285714285714286, max: 0.4209809264305177
 hidden_sizes: [100, 100], epochs: 500, batch_size: 64, learning_rate: 0.003
@@ -53,12 +54,13 @@ hidden_sizes: [100, 100], epochs: 500, batch_size: 64, learning_rate: 0.03
 mean: 0.40948519705725756, min: 0.36002785515320335, max: 0.445993031358885
 hidden_sizes: [100, 100], epochs: 500, batch_size: 64, learning_rate: 0.1
 mean: 0.3781080503449839, min: 0.30994550408719346, max: 0.426157237325496
-
+```
 Furthermore, after a long time of testing, it is found that when learning rate>0.0075, it is possible that there will be a gradient explosion so the final setting for learning rate is fixed at 0.0075.
 
 Conclusion 2: learning rate cannot be bigger than 0.0075 to avoid gradient explosion.
 
 1.2 Adjust hidden layer:
+```python
 hidden_sizes: [50, 100], epochs: 300, batch_size: 64, learning_rate: 0.0075
 mean: 0.4066351264604758, min: 0.3816155988857939, max: 0.4257142857142857
 hidden_sizes: [100, 100], epochs: 300, batch_size: 64, learning_rate: 0.0075
@@ -67,10 +69,11 @@ hidden_sizes: [150, 150], epochs: 300, batch_size: 64, learning_rate: 0.0075
 mean: 0.41975581367338343, min: 0.40606271777003487, max: 0.45891364902506965
 hidden_sizes: [275, 275], epochs: 300, batch_size: 64, learning_rate: 0.0075
 mean: 0.42908247547282397, min: 0.4107142857142857, max: 0.4627177700348432
-
+```
 Conclusion 2: increasing hidden layer size generally increase the accuracy. But the 5 mins training limit does not allow us to increase the size dramatically.
 
 Increasing hidden layer levels is also tried. Such as 3 layers and even up to 6 layers.
+```python
 hidden_sizes: [50, 50, 50], epochs: 300, batch_size: 64, learning_rate: 0.0075
 mean: 0.39182539151835805, min: 0.32255694342395297, max: 0.4449860724233983
 hidden_sizes: [75, 75, 75], epochs: 300, batch_size: 64, learning_rate: 0.0075
@@ -79,7 +82,7 @@ hidden_sizes: [100, 100, 100], epochs: 300, batch_size: 64, learning_rate: 0.007
 mean: 0.39322112603593135, min: 0.26323119777158777, max: 0.4522648083623693
 hidden_sizes: [125, 125, 125], epochs: 300, batch_size: 64, learning_rate: 0.0075
 mean: 0.40728868627129283, min: 0.3463414634146341, max: 0.4554317548746518
-
+```
 It is found that [150,300,150,75,30] is also a very good design and the accuracy is about 46%. However, the training cannot finish in 5 mins. When the learning rate is increased to force the model to converge quicker, there is a potential danger of gradient explosion. So for this specific task, we prefer the 2 layers hidden layer.
 
 Conclusion 3: Hidden layer [275, 275] seems to be the best for this task considering time, stability, and accuracy (6 * 80% + 4 * 100% is better than 8 *100% + 1 * timeout + 1 * gradient explosion for the grade)/
@@ -91,6 +94,7 @@ This is the most difficult section and hard to provide all the data in this repo
 Conclusion 4: Epoch = 1500.
 
 Example:
+```python
 Running dataset split 5 
 New best loss: 0.06437956831024724 at epoch 10
 New best loss: 0.06310660080898989 at epoch 20
@@ -160,16 +164,16 @@ New best loss: 0.05767185990055117 at epoch 1490
 New best loss: 0.05763984596121853 at epoch 1500
 Epoch 1500, Loss: 0.05763984596121853
 SUCCESS: accuracy: 0.448934606906686, ref accuracy: 0.4908, grade: 100%
-
+```
 1.4 batch size:
-
+```python
 hidden_sizes: [275, 275], epochs: 1500, batch_size: 16, learning_rate: 0.0075
 mean: 0.44437104234406047, min: 0.424141689373297, max: 0.47017421602787455
 hidden_sizes: [275, 275], epochs: 1500, batch_size: 32, learning_rate: 0.0075
 mean: 0.43200083261272635, min: 0.3850974930362117, max: 0.45365853658536587
 hidden_sizes: [275, 275], epochs: 1500, batch_size: 64, learning_rate: 0.0075
 mean: 0.411287558346074, min: 0.3908890521675239, max: 0.4466898954703833
-
+```
 It is found that batch_size = 16 generate the best result. Batch_size = 8 is also tried but it results in gradient explosion most of the time.
 
 Conclusion 5: Batch size = 16
